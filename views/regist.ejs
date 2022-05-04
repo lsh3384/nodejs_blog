@@ -1,0 +1,89 @@
+<html>
+  <head>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+
+<script>
+  // 저장 버튼
+  function fn_submit() {
+
+    var idVal = $("#mnger_id").val();
+    if (idVal == null || idVal == '') {
+      alert("아이디를 입력해 주세요.");
+      $('#USER_PWD').focus();
+      return;
+    }
+
+    // 비밀번호 필수값 체크, 정규식 체크	- 영문, 숫자, 특수문자를 조합한 9~20자리
+    var pwVal = $("#mnger_pw").val();
+    var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{9,20}$/; // 검증에 사용할 정규식 변수 regExp에 저장 
+    if (pwVal.match(pwReg) == null || pwVal.match(pwReg) == '' || pwVal == null || pwVal == '') {
+      alert('비밀번호 형식에 맞춰 입력해 주세요.');
+      $('#USER_PWD').val('');
+      $('#USER_PWD').focus();
+      return;
+    }
+    // 비밀번호확인 필수값체크
+    if ($('#mnger_pw_cfm').val() == '') {
+      alert('비밀번호 확인을 입력해 주세요!');
+      $('#USER_PWD_CFM').focus();
+      return;
+    }
+    // 비밀번호와 비밀번호확인 값이 같은지 확인
+    if ($('#mnger_pw').val() != '' && $('#mnger_pw_cfm').val() != '') {
+      if ($('#mnger_pw').val() != $('#mnger_pw_cfm').val()) {
+        $('#mnger_pw_cfm').val('');
+        $('#mnger_pw_cfm').focus();
+        alert('새 비밀번호와 확인이 서로 다릅니다. 다시 입력해 주세요!.');
+        return;
+      }
+    }
+
+    // 이름 필수값 체크, 정규식 체크	 - 형식 : 한글 2~5자리	
+    var nmVal = $("#mnger_nm").val();
+    var nmReg = /^[가-힣]{2,5}$/; // 검증에 사용할 정규식 변수 regExp에 저장 
+    if (nmVal.match(nmReg) == null || nmVal.match(nmReg) == '' || nmVal == null || nmVal == '') {
+      alert('이름 형식에 맞춰 입력해 주세요.');
+      $('#mnger_nm').val('');
+      $('#mnger_nm').focus();
+      return;
+    }
+
+
+
+    // // 핸드폰번호 필수값체크, 정규식 체크 - 형식 : 000-0000-0000
+    // var mpVal = $("#MOBILE").val();
+    // var mpReg = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/; // 검증에 사용할 정규식 변수 regExp에 저장 
+    // if (mpVal.match(mpReg) == null || mpVal.match(mpReg) == '' || mpVal == null || mpVal == '') {
+    //   alert('휴대전화번호 형식에 맞춰 입력해 주세요.');
+    //   $('#MOBILE').val('');
+    //   $('#MOBILE').focus();
+    //   return;
+    // }
+
+    alert("관리자등록이 완료 되었습니다.");
+
+    form.action = "/regist_action";
+    form.submit();
+  }
+</script>
+
+
+
+  <body>
+
+    <%= auth_cd %>
+    <p>관리자 등록</p>
+    <form id="form" action="http://localhost:9090/regist_action" method="post">
+      <p>아이디: </p><input id="mnger_id" type="text" name="mnger_id"  ></input>
+      <p>비밀번호: </p><input id="mnger_pw" type="password" name="mnger_pw" ></input>
+      <p>비밀번호 확인: </p><input id="mnger_pw_cfm" type="password" name="mnger_pw_cfm" ></input>
+      <p>이름: </p><input id="mnger_nm" type="text" name="mnger_nm" ></input>
+      
+      <button type="button" onclick="fn_submit();">등록</button>
+    </form>
+  </body>
+  
+</html>
