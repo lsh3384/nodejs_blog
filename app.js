@@ -1,14 +1,18 @@
 const mysql = require('mysql');
 var session = require('express-session');
 var MySQLStore = require("express-mysql-session")(session);
-var options = {
-  host: '127.0.0.1',
-  port: 3306,
-  user: 'aiot',
-  database: 'aiot',
-  password: 'u00000000'
-};
-var connection = mysql.createConnection(options);
+
+const getConnection = require('./model/db')
+const connection = getConnection();
+// var options = {
+//   host: '127.0.0.1',
+//   port: 3306,
+//   user: 'root',
+//   database: 'iot',
+//   password: 'toby1234'
+// };
+// var connection = mysql.createConnection(options);
+
 var sessionStore = new MySQLStore({}, connection);
 
 
