@@ -1,19 +1,15 @@
-const mysql = require('mysql');
+// const mysql = require('mysql');
 var session = require('express-session');
 var MySQLStore = require("express-mysql-session")(session);
 
 const getConnection = require('./model/db')
 const connection = getConnection();
-// var options = {
-//   host: '127.0.0.1',
-//   port: 3306,
-//   user: 'root',
-//   database: 'iot',
-//   password: 'toby1234'
-// };
-// var connection = mysql.createConnection(options);
-
-var sessionStore = new MySQLStore({}, connection);
+let express_mysql_seesion_options = {
+  clearExpired: true,
+  expiration: 60 * 60 * 1000,
+  checkExpirationInterval: 10 * 1000,
+}
+var sessionStore = new MySQLStore(express_mysql_seesion_options, connection);
 
 
 const express = require('express');
@@ -21,11 +17,12 @@ const app = express();                  // 클라이언트와 통신
 
 app.use(
   session({
-    key: "session_id",
+    key: "session_id_test",  // 쿠키에 나타날 이름을 정해줄 수 있다.
     secret: "session_cookie_secret",
-    store: sessionStore,
+    store: sessionStore,    // 위에서 설정한 express-mysql-session으로 mysql에 저장하겠다는 것을 나타냄
     resave: false,
     saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 },  //브라우저에서 쿠키의 expiration 시간을 정함.
   })
 );
 

@@ -2,14 +2,43 @@
   <head>
     
   </head>
-  <% if(typeof session_id === 'undefined') { %>
+  
 
-  <% } else { %>
-    <%= session_id %>
-  <% } %>
   
 <body>
-  메인페이지
+
+
+  <div> nav bar영역</div>
+  <% if(typeof session_id !== 'undefined') { %>
+    <%= session_id %> 님 환영합니다.
+    <a href="/logout">로그아웃</a>
+  <% } else { %>
+    <a href="/login">로그인</a>
+    <a href="/regist">관리자 등록</a>
+  <% } %>
+  
+
+
+
+  <br>
+  <br>
+  <div>메인페이지</div>
+
+
+
+  <br>
+  <div>왼쪽메뉴</div>
+  <% if(typeof left_menus !== 'undefined') { %>
+    <% left_menus.forEach(function(left_menu, index) { %>
+      <div> <%= left_menu.MENU_NM %> </div>
+    <% }) %>
+  <% } else { %>
+    
+  <% } %>
+  
+
+
+
 </body>
 
   

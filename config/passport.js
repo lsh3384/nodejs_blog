@@ -28,8 +28,8 @@ passport.deserializeUser(function(id, done) {
 var LocalStrategy = require('passport-local').Strategy;
 passport.use('local-login',
   new LocalStrategy({
-      usernameField : 'mnger_id',   // req.body.id로 불러서 사용할 수 있도록 해줌
-      passwordField : 'mnger_pw',   // req.body.pw로 불러서 사용할 수 있도록 해줌
+      usernameField : 'mnger_id',   // req.body 객체에 해당 이름으로 추가해서 사용할 수 있도록 해줌
+      passwordField : 'mnger_pw',   // req.body 객체에 해당 이름으로 추가해서 사용할 수 있도록 해줌
       passReqToCallback : true,
       session: true
     },

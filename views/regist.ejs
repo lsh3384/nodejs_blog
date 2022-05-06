@@ -68,21 +68,66 @@
     form.action = "/regist_action";
     form.submit();
   }
+
+  function fn_idChek(){
+    var idVal = $("#mnger_id").val(); 
+    var idReg = /^[A-Za-z0-9_\-]{5,20}$/;
+    if (idVal.match(idReg) == null || idVal.match(idReg) == '' || idVal == null || idVal == '') { 
+      alert('아이디 형식에 맞춰 입력해 주세요.'); 
+      $('#mnger_id').focus();
+      return;
+    } else {	
+      
+    $.ajax({
+      url : '/id_check',
+      data : {mnger_id:$('#mnger_id').val()},   //전송파라미터
+      type : 'POST',
+      dataType : 'json',
+      success : function(result) {
+        var id_check_result = result.id_check;
+        alert(id_check_result);
+        if(id_check_result == "ok"){
+          $('#id_check_yn').val("y");
+          alert("사용가능한 아이디 입니다.");
+  // 					return true;
+        }else{
+          alert("사용중인 아이디입니다. 다시 입력해 주세요.");
+          form.mnger_id.focus();
+          return false;
+        }
+      },
+      error : function() { // Ajax 전송 에러 발생시 실행
+        alert('오류가 발생했습니다.\n관리자에게 문의 바랍니다.','e');
+      },
+      complete : function(result) { // success, error 실행 후 최종적으로 실행
+        
+      }
+    });	
+    }
+  }
+
+
+
 </script>
 
 
 
   <body>
-
-    <%= auth_cd %>
+    
     <p>관리자 등록</p>
     <form id="form" action="http://localhost:9090/regist_action" method="post">
       <p>아이디: </p><input id="mnger_id" type="text" name="mnger_id"  ></input>
+      <button type="button" class="btn_inside" onclick="javascript:fn_idChek();"><b>아이디 중복 확인</b></button>
       <p>비밀번호: </p><input id="mnger_pw" type="password" name="mnger_pw" ></input>
       <p>비밀번호 확인: </p><input id="mnger_pw_cfm" type="password" name="mnger_pw_cfm" ></input>
       <p>이름: </p><input id="mnger_nm" type="text" name="mnger_nm" ></input>
-      
+      <select id="auth_cd" name="auth_cd">
+        <% auths.forEach(function(auth, index) { %>
+          <option value="<%= auth.AUTH_CD %>"><%= auth.AUTH_NM %></option>  
+        <% }) %>
+      </select>  
       <button type="button" onclick="fn_submit();">등록</button>
+      <input type="hidden" id="id_check_yn" name="id_check_yn" value="n">
     </form>
   </body>
   
