@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS</title>
+    <style>
+      header {
+        background-color: rgb(255, 238, 0);
+        height: 15vh;
+      }
+      footer {
+        background-color: rgb(0, 89, 255);
+        height: 50px;
+        position: relative;
+        transform: translateY(-100%);
+      }
+      #left_menu_container {
+        width: 30vh;
+        height: 100vh;
+        background-color: brown;
+        display: flex;
+        flex-direction: column;
+        float: left;
+      }
+      .items {
+        width: auto;
+        height: 50%;
+        text-align: center;
+        background: #ffc93c;
+        border: 1px solid;
+      }
+      #main {
+        background-color: green;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>헤더</header>
+    <div id="left_menu_container">
+      <div class="items">1</div>
+      <div class="items">2</div>
+      <div class="items">3</div>
+    </div>
+    <main>
+      <div id="main">메인</div>
+    </main>
+    <footer>푸터</footer>
+  </body>
+</html>
