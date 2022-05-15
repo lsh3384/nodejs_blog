@@ -4,47 +4,78 @@
     <meta charset="utf-8" />
     <title>CSS</title>
     <style>
-      header {
-        background-color: rgb(255, 238, 0);
-        height: 15vh;
+      .container {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: 100px minmax(min-content, max-content) 100px 100px;
+        grid-template-areas: 
+        "header header header"
+        "left-menu main ad"
+        "recommend recommend recommend"
+        "footer footer footer";
       }
-      footer {
-        background-color: rgb(0, 89, 255);
-        height: 50px;
-        position: relative;
-        transform: translateY(-100%);
+      .container > * {
+        background-color: yellow;
+      }
+      header {
+        grid-area: header;
       }
       #left_menu_container {
-        width: 30vh;
-        height: 100vh;
-        background-color: brown;
-        display: flex;
-        flex-direction: column;
-        float: left;
+        grid-area: left-menu;
       }
-      .items {
-        width: auto;
-        height: 50%;
-        text-align: center;
-        background: #ffc93c;
-        border: 1px solid;
+      main {
+        grid-area: main;
       }
-      #main {
-        background-color: green;
-        display: inline-block;
+      #ad {
+        grid-area: ad;
       }
+      #recommend {
+        grid-area: recommend;
+      }
+      footer {
+        grid-area: footer;
+      }
+    
     </style>
   </head>
   <body>
-    <header>헤더</header>
-    <div id="left_menu_container">
-      <div class="items">1</div>
-      <div class="items">2</div>
-      <div class="items">3</div>
+    <div class="container">
+      <header>
+        <p>블로그명: B개발자의 하루</p>
+        <p> 메뉴들이 있을거에요.</p>
+      </header>
+      <div id="left_menu_container">
+        <div>왼쪽 메뉴바 입니다.</div>
+        <% if(typeof menus !== "undefined") { %>
+          <% menus.forEach( (menu, index) => { %>
+            <div class="items"><%= menu.name %></div>
+          <% }) %>
+        <% } %>
+      </div>
+      <main>
+        <div id="main">메인은 글을 넣어주자</div>
+        <div id="main">글 제목</div>
+        <div id="main">글 내용</div>
+        <div id="main">댓글</div>
+      </main>
+      
+      
+      <div id="ad">
+        구글님 광고 자리
+      </div>
+      
+      <div id="recommend">
+        <div>추천 게시글</div>
+      </div>
+
+
+      <footer>푸터: 오늘 커밋했니?</footer>
     </div>
-    <main>
-      <div id="main">메인</div>
-    </main>
-    <footer>푸터</footer>
+
+
+
+    
+    
   </body>
 </html>
