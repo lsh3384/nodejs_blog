@@ -2,7 +2,7 @@ const getConnection = require('./db')
 
 var exports = module.exports = {};
 
-exports.auth_check = function(mnger_id) {
+exports.authCheck = function(mnger_id) {
   return new Promise((resolve, reject)=> {
     getConnection().query('select auth_cd from mnger where mnger_id=?',[mnger_id], function(err, data) {
       console.log('auth_check');
@@ -16,7 +16,7 @@ exports.auth_check = function(mnger_id) {
   });
 }
 
-exports.auth_select = function(){
+exports.authSelect = function(){
   return new Promise((resolve, reject)=> {
     getConnection().query('select * from auth_cd_mng', function(err, data) {
       console.log('auth_cd_select');

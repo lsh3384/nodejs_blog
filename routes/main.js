@@ -3,6 +3,7 @@ var router = express.Router();
 
 const { auth_check } = require("../model/auth_check");
 const { getAllMenus } = require("../model/menu");
+const { getAllPosts } = require("../model/post");
 
 router.get("/main", async function (req, res) {
   let mnger_id = req.user;
@@ -26,11 +27,14 @@ router.get("/main", async function (req, res) {
   });
 });
 
+
 router.get("/", async function (req, res) {
   let menus = await getAllMenus();
+  let posts = await getAllPosts();
 
   res.render("home", {
     menus: menus,
+    posts: posts,
   });
 });
 

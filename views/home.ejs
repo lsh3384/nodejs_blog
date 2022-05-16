@@ -15,11 +15,12 @@
         "recommend recommend recommend"
         "footer footer footer";
       }
-      .container > * {
+      .container > main {
         background-color: yellow;
       }
       header {
         grid-area: header;
+        text-align: center;
       }
       #left_menu_container {
         grid-area: left-menu;
@@ -36,15 +37,22 @@
       footer {
         grid-area: footer;
       }
+      .post {
+        margin: 10px;
+        margin-bottom: 100px;
+      }
     
     </style>
   </head>
   <body>
     <div class="container">
+      
       <header>
         <p>블로그명: B개발자의 하루</p>
         <p> 메뉴들이 있을거에요.</p>
       </header>
+
+
       <div id="left_menu_container">
         <div>왼쪽 메뉴바 입니다.</div>
         <% if(typeof menus !== "undefined") { %>
@@ -53,11 +61,37 @@
           <% }) %>
         <% } %>
       </div>
+
+
       <main>
-        <div id="main">메인은 글을 넣어주자</div>
-        <div id="main">글 제목</div>
-        <div id="main">글 내용</div>
-        <div id="main">댓글</div>
+        <div>메인 글 영역입니다</div>
+
+        <% if(typeof posts !== "undefined") { %>
+          
+            <% posts.forEach( (post, index) => { %>
+              <table class="post">
+                <tr>
+                  <td> 제목: <%= post.title %></td>
+                </tr>
+                <tr>
+                  <td> 작성일: <%= post.rgs_date %> </td>
+                </tr>
+                <tr>
+                  <td> 내용 : <%= post.content %> </td>
+                </tr>
+
+                <tr>
+                  <td> 댓글 </td>
+                </tr>
+              </table>
+                
+            <% }) %>
+
+          </table>
+          
+        <% } %>
+        
+
       </main>
       
       
@@ -65,12 +99,14 @@
         구글님 광고 자리
       </div>
       
+
       <div id="recommend">
         <div>추천 게시글</div>
       </div>
 
 
       <footer>푸터: 오늘 커밋했니?</footer>
+
     </div>
 
 
