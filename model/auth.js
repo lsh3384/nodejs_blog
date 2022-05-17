@@ -2,10 +2,10 @@ const getConnection = require('./db')
 
 var exports = module.exports = {};
 
-exports.authCheck = function(id) {
+exports.checkAuth = function(id) {
   return new Promise((resolve, reject)=> {
-    getConnection().query('select auth_cd from mnger where mnger_id=?',[id], function(err, data) {
-      console.log('authCheck');
+    getConnection().query('select auth_code from user where id=?',[id], function(err, data) {
+      console.log('checkAuth');
       if(err) {
         reject(err);
       }
@@ -16,10 +16,10 @@ exports.authCheck = function(id) {
   });
 }
 
-exports.authSelect = function(){
+exports.getAllAuth = function(){
   return new Promise((resolve, reject)=> {
-    getConnection().query('select * from auth_cd_mng', function(err, data) {
-      console.log('auth_cd_select');
+    getConnection().query('select * from auth', function(err, data) {
+      console.log('getAllAuth');
       if(err) {
         reject(err);
       }

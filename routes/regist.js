@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const {idCheck, registUser} = require('../model/regist');
-const {selectAuth} = require('../model/auth_check');
+const {checkId, registUser} = require('../model/regist');
+const {getAllAuth} = require('../model/auth');
 
 
 router.get('/regist', async function(req, res) {
@@ -31,17 +31,17 @@ router.post('/registAction', async function(req, res) {
 })
 
 
-router.post('/idCheck', async function(req, res) {
-  console.log('idCheck');
+router.post('/checkId', async function(req, res) {
+  console.log('checkId');
   let id = req.body.id;
   console.log('id' + id);
-  let idCheckResult = await idCheck(id);
+  let checkIdResult = await checkId(id);
 
-  console.log(idCheckResult);
+  console.log(checkIdResult);
   let responseData = {};
-  if (idCheckResult === true) {
+  if (checkIdResult === true) {
     console.log('true');
-    responseData.idCheck = 'ok';
+    responseData.checkId = 'ok';
     console.log(responseData);
     res.json(responseData);
   } else {

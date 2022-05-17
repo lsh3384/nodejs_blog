@@ -1,4 +1,4 @@
-const {pwCheck, autCheck} = require('../model/passport_func');
+const {checkPassword, checkAuth} = require('../model/passport_func');
 
 const req = require('express/lib/request');
 var passport = require('passport');
@@ -9,9 +9,9 @@ passport.serializeUser(async function(user, done) {
   console.log('user', user);
 
   // service
-  let result = await authCheck(user.id);
+  let result = await checkAuth(user.id);
   console.log('auth check result:' + result[0].auth_cd);
-  
+
   done(null, user.id);
 });
 
@@ -37,7 +37,7 @@ passport.use('local-login',
       console.log('passport');
       let id = req.body.id;
       let pw = req.body.pw;
-      let pw_check_result = await pwCheck(id, pw);
+      let pw_check_result = await checkPassword(id, pw);
       
       if(pw_check_result === true) {
         return done(null, {

@@ -2,9 +2,9 @@ const getConnection = require('./db')
 
 var exports = module.exports = {};
 
-exports.registUser = function(id, nm, pw, auth_cd) {
+exports.registUser = function(id, name, password, authCode) {
   return new Promise((resolve, reject) => {
-    getConnection().query('insert into mnger(mnger_id, mnger_nm, mnger_pw, AUTH_CD) values(?, ?, HEX( AES_ENCRYPT(?,\'secret_key\') ), ?);', [id, nm, pw, auth_cd], function(err, data) {
+    getConnection().query('insert into user(id, name, password, auth_code) values(?, ?, HEX( AES_ENCRYPT(?,\'secret_key\') ), ?);', [id, name, password, authCode], function(err, data) {
       if(err) {
         console.log(err);
         reject(err);
@@ -17,7 +17,7 @@ exports.registUser = function(id, nm, pw, auth_cd) {
 
 exports.checkId = function(id) {
   return new Promise((resolve, reject) => {
-    getConnection().query('select count(*) as count from mnger where mnger_id = ?', [id], function(err, data) {
+    getConnection().query('select count(*) as count from user where id = ?', [id], function(err, data) {
       if(err) {
         console.log(err);
         reject(err);

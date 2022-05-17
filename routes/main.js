@@ -1,17 +1,17 @@
 var express = require("express");
 var router = express.Router();
 
-const { auth_check } = require("../model/auth_check");
-const { getAllMenus } = require("../model/menu");
+const { checkAuth } = require("../model/auth");
+const { getAllLeftMenus } = require("../model/menu");
 const { getAllPosts } = require("../model/post");
 
 router.get("/main", async function (req, res) {
-  let mnger_id = req.user;
-  if (typeof mnger_id !== "undefined") {
-    var auth_cd = await auth_check(mnger_id);
-    console.log("main auth_cd : " + auth_cd);
-    var left_menus = await get_left_menus(auth_cd);
-    console.log(left_menus);
+  let id = req.user;
+  if (typeof id !== "undefined") {
+    var authCode = await checkAuth(id);
+    console.log("main auth_code : " + authCode);
+    var leftMenus = await getAllLeftMenus(authCode);
+    console.log(leftMenus);
   }
 
   // nodejs에서 포함된 것을 걸러내는 경우.. 데이터베이스에서 포함된 것만 가져오는 것이 더 좋을 듯.
@@ -21,9 +21,9 @@ router.get("/main", async function (req, res) {
   console.log("session_id in Main Page: " + req.sessionID);
   console.log("user id in passport: " + req.user);
 
-  res.render("main", {
-    session_id: req.user,
-    left_menus: left_menus,
+  res.render("home", {
+    userId: req.user,
+    leftMenus: leftMenus,
   });
 });
 

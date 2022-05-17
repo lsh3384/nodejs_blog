@@ -48,15 +48,19 @@
     <div class="container">
       
       <header>
-        <p>블로그명: B개발자의 하루</p>
-        <a href="/login">로그인</a> <a href="/regist">로그인</a>
+        <% if(typeof userId !== "undefined") { %>
+          <p>블로그명: B개발자의 하루 <%= userId %> 님 환영합니다.</p>
+        <% } else { %>
+          <p>블로그명: B개발자의 하루</p>
+        <% } %>
+        <a href="/login">로그인</a> <a href="/regist">회원가입</a>
       </header>
 
 
       <div id="left_menu_container">
         <div>왼쪽 메뉴바 입니다.</div>
-        <% if(typeof menus !== "undefined") { %>
-          <% menus.forEach( (menu, index) => { %>
+        <% if(typeof leftMenus !== "undefined") { %>
+          <% leftMenus.forEach( (menu, index) => { %>
             <div class="items"><%= menu.name %></div>
           <% }) %>
         <% } %>
