@@ -1,51 +1,51 @@
 var express = require('express');
 var router = express.Router();
-const {id_check, mnger_regist} = require('../model/regist');
-const {auth_select} = require('../model/auth_check');
+const {idCheck, registUser} = require('../model/regist');
+const {selectAuth} = require('../model/auth_check');
 
 
 router.get('/regist', async function(req, res) {
   
-  let auths = await auth_select();
+  let auths = await getAllAuth();
   res.render('regist', {
     auths : auths
   });
 })
 
 
-router.post('/regist_action', async function(req, res) {
+router.post('/registAction', async function(req, res) {
 
-  let mnger_id = req.body.mnger_id;
-  let mnger_nm = req.body.mnger_nm;
-  let mnger_pw = req.body.mnger_pw;
-  let auth_cd = req.body.auth_cd;
+  let id = req.body.id;
+  let name = req.body.name;
+  let password = req.body.password;
+  let authCode = req.body.authCode;
 
-  console.log(mnger_id);
-  console.log(mnger_nm);
-  console.log(mnger_pw);
-  console.log(auth_cd);
-  await mnger_regist(mnger_id, mnger_nm, mnger_pw, auth_cd);
+  console.log(id);
+  console.log(name);
+  console.log(password);
+  console.log(authCode);
+  await registUser(id, name, password, authCode);
   
   
   res.redirect('/login');
 })
 
 
-router.post('/id_check', async function(req, res) {
-  console.log('id_check');
-  let mnger_id = req.body.mnger_id;
-  console.log('mnger_id' + mnger_id);
-  let id_check_result = await id_check(mnger_id);
+router.post('/idCheck', async function(req, res) {
+  console.log('idCheck');
+  let id = req.body.id;
+  console.log('id' + id);
+  let idCheckResult = await idCheck(id);
 
-  console.log(id_check_result);
+  console.log(idCheckResult);
   let responseData = {};
-  if (id_check_result === true) {
+  if (idCheckResult === true) {
     console.log('true');
-    responseData.id_check = 'ok';
+    responseData.idCheck = 'ok';
     console.log(responseData);
     res.json(responseData);
   } else {
-    responseData.id_check = 'fail';
+    responseData.idCheckResult = 'fail';
     res.json(responseData);
   }
 })

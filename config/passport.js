@@ -1,4 +1,4 @@
-const {pw_check, auth_check} = require('../model/passport_func');
+const {pwCheck, autCheck} = require('../model/passport_func');
 
 const req = require('express/lib/request');
 var passport = require('passport');
@@ -9,9 +9,9 @@ passport.serializeUser(async function(user, done) {
   console.log('user', user);
 
   // service
-  let result = await auth_check(user.id);
+  let result = await authCheck(user.id);
   console.log('auth check result:' + result[0].auth_cd);
-  req.customdata = result[0].auth_cd;
+  
   done(null, user.id);
 });
 
@@ -28,16 +28,16 @@ passport.deserializeUser(function(id, done) {
 var LocalStrategy = require('passport-local').Strategy;
 passport.use('local-login',
   new LocalStrategy({
-      usernameField : 'mnger_id',   // req.body 객체에 해당 이름으로 추가해서 사용할 수 있도록 해줌
-      passwordField : 'mnger_pw',   // req.body 객체에 해당 이름으로 추가해서 사용할 수 있도록 해줌
+      usernameField : 'id',   // post요청으로 id로 받은 파라미터를 req.body 객체에 해당 이름으로 추가해서 사용할 수 있도록 해줌
+      passwordField : 'pw',   // post요청으로 id로 받은 파라미터를 req.body 객체에 해당 이름으로 추가해서 사용할 수 있도록 해줌
       passReqToCallback : true,
       session: true
     },
     async function(req, username, password, done) {
       console.log('passport');
-      let id = req.body.mnger_id;
-      let pw = req.body.mnger_pw;
-      let pw_check_result = await pw_check(id, pw);
+      let id = req.body.id;
+      let pw = req.body.pw;
+      let pw_check_result = await pwCheck(id, pw);
       
       if(pw_check_result === true) {
         return done(null, {

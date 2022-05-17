@@ -2,16 +2,16 @@ const getConnection = require('./db')
 
 var exports = module.exports = {};
 
-exports.pwCheck = function(mnger_id, mnger_pw) {
+exports.pwCheck = function(id, pw) {
   return new Promise((resolve, reject)=> {
-    getConnection().query('select count(*) as count from mnger where mnger_id=? and mnger_pw=HEX(AES_ENCRYPT(?,\'secret_key\'))',[mnger_id, mnger_pw], function(err, data) {
+    getConnection().query('select count(*) as count from user where id=? and pw=HEX(AES_ENCRYPT(?,\'secret_key\'))',[id, pw], function(err, data) {
       console.log('pw_check');
       if(err) {
         reject(err);
       }
       
-      let pw_check_result = data[0].count;
-      if (pw_check_result == 1) {
+      let pwCheckResult = data[0].count;
+      if (pwCheckResult == 1) {
         resolve(true);
       } else {
         console.log(data)
@@ -21,9 +21,9 @@ exports.pwCheck = function(mnger_id, mnger_pw) {
   });
 }
 
-exports.authCheck = function(mnger_id) {
+exports.authCheck = function(id) {
   return new Promise((resolve, reject)=> {
-    getConnection().query('select auth_cd from mnger where mnger_id=?',[mnger_id], function(err, data) {
+    getConnection().query('select auth_cd from mnger where mnger_id=?',[id], function(err, data) {
       if(err) {
         reject(err);
       }
