@@ -15,7 +15,7 @@ router.post('/login', async function(req, res, next) {
   next();
   
 }, passport.authenticate('local-login', {
-  successRedirect : '/main',
+  successRedirect : '/',
   failureRedirect : '/login'
   }
 ));
