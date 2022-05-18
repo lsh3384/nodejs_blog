@@ -41,6 +41,38 @@
         margin: 10px;
         margin-bottom: 100px;
       }
+      .flex_container {
+        display: flex;
+        background-color: blue;
+        justify-content: center;
+        height: 100%;
+      }
+      .title {
+        background-color: red;
+        border: thin;
+        padding: 5px;
+        height: auto;
+        flex-basis: 500px;
+        flex-grow: 1;
+      }
+      .login {
+        background-color: greenyellow;
+        border: thin;
+        padding: 5px;
+        height: auto;
+        flex-basis: 200px;
+        flex-grow: 1;
+
+      }
+      .logo {
+        background-color: gray;
+        border: thin;
+        padding: 5px;
+        height: auto;
+        flex-basis: 200px;
+        flex-grow: 1;
+      }
+
     
     </style>
   </head>
@@ -48,14 +80,26 @@
     <div class="container">
       
       <header>
-        <% if(typeof userId !== "undefined") { %>
-          <p>블로그명: B개발자의 하루 <%= userId %> 님 환영합니다.</p>
-          <a href="/logout">로그아웃</a>
-        <% } else { %>
-          <p>블로그명: B개발자의 하루</p>
-          <a href="/login">로그인</a> <a href="/regist">회원가입</a>
-        <% } %>
-        
+        <div class="flex_container">
+          <div class="logo">
+            <span>로고</span>
+          </div>
+          <% if(typeof userId !== "undefined") { %>
+            <div class="title">
+              <span>블로그명: B개발자의 하루</span>
+            </div>
+            <div class="login">
+              <%= userId %> 님 환영합니다. <a href="/logout">로그아웃</a>
+            </div>
+          <% } else { %>
+            <div class="title">
+              <span>블로그명: B개발자의 하루</span>
+            </div>
+            <div class="login">
+              <a href="/login">로그인</a> <a href="/regist">회원가입</a>
+            </div>
+          <% } %>
+        </div>
       </header>
 
 
