@@ -49,7 +49,7 @@ app.use(passport.session());
 
 
 const path = require('path');
-app.use(express.static(path.join(__dirname, '/www')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 /* router 추가 */

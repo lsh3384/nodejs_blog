@@ -8,7 +8,7 @@
         display: grid;
         grid-gap: 5px;
         grid-template-columns: 1fr 3fr 1fr;
-        grid-template-rows: 100px minmax(min-content, max-content) 100px 100px;
+        grid-template-rows: 200px minmax(min-content, max-content) 100px 100px;
         grid-template-areas: 
         "header header header"
         "left-menu main ad"
@@ -21,6 +21,7 @@
       header {
         grid-area: header;
         text-align: center;
+        background-image: url('img/background.jpg');
       }
       #left_menu_container {
         grid-area: left-menu;
@@ -43,12 +44,14 @@
       }
       .flex_container {
         display: flex;
-        background-color: blue;
+        /* background-color: blue; */
         justify-content: center;
         height: 100%;
+        align-items: center;
+        
       }
       .title {
-        background-color: red;
+        /* background-color: red; */
         border: thin;
         padding: 5px;
         height: auto;
@@ -56,7 +59,7 @@
         flex-grow: 1;
       }
       .login {
-        background-color: greenyellow;
+        /* background-color: greenyellow; */
         border: thin;
         padding: 5px;
         height: auto;
@@ -65,7 +68,7 @@
 
       }
       .logo {
-        background-color: gray;
+        /* background-color: gray; */
         border: thin;
         padding: 5px;
         height: auto;
@@ -86,14 +89,15 @@
           </div>
           <% if(typeof userId !== "undefined") { %>
             <div class="title">
-              <span>블로그명: B개발자의 하루</span>
+              <span style="font-family: Arial; font-size: 100pt">지금 개발중...</span>
+              
             </div>
             <div class="login">
               <%= userId %> 님 환영합니다. <a href="/logout">로그아웃</a>
             </div>
           <% } else { %>
             <div class="title">
-              <span>블로그명: B개발자의 하루</span>
+              <span style="font-family: Arial; font-size: 50pt">지금 개발중...</span>
             </div>
             <div class="login">
               <a href="/login">로그인</a> <a href="/regist">회원가입</a>
