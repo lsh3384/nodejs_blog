@@ -4,6 +4,14 @@
     <meta charset="utf-8" />
     <title>CSS</title>
     <style>
+      @font-face {
+        font-family: 'gmarket_bold';
+        src: url('resources/GmarketSansTTFBold.ttf') format('truetype');
+        font-family: 'gmarket_light';
+        src: url('resources/GmarketSansTTFLight.ttf') format('truetype');
+        font-family: 'gmarket_medium';
+        src: url('resources/GmarketSansTTFMedium.ttf') format('truetype');
+      }
       .container {
         display: grid;
         grid-gap: 5px;
@@ -57,6 +65,7 @@
         height: auto;
         flex-basis: 500px;
         flex-grow: 1;
+        font-family: 'gmarket_medium';
       }
       .login {
         /* background-color: greenyellow; */
@@ -89,7 +98,7 @@
           </div>
           <% if(typeof userId !== "undefined") { %>
             <div class="title">
-              <span style="font-family: Arial; font-size: 100pt">지금 개발중...</span>
+              <span style="font-size: 50pt">지금 개발중...</span>
               
             </div>
             <div class="login">
@@ -97,7 +106,7 @@
             </div>
           <% } else { %>
             <div class="title">
-              <span style="font-family: Arial; font-size: 50pt">지금 개발중...</span>
+              <span style="font-size: 50pt">지금 개발중...</span>
             </div>
             <div class="login">
               <a href="/login">로그인</a> <a href="/regist">회원가입</a>
