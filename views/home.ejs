@@ -6,11 +6,23 @@
     <style>
       @font-face {
         font-family: 'gmarket_bold';
-        src: url('resources/GmarketSansTTFBold.ttf') format('truetype');
+        src: url('resources/font/GmarketSansTTFBold.ttf') format('truetype');
+      }
+      @font-face {
         font-family: 'gmarket_light';
-        src: url('resources/GmarketSansTTFLight.ttf') format('truetype');
+        src: url('resources/font/GmarketSansTTFLight.ttf') format('truetype');
+      }
+      @font-face {
         font-family: 'gmarket_medium';
-        src: url('resources/GmarketSansTTFMedium.ttf') format('truetype');
+        src: url('resources/font/GmarketSansTTFMedium.ttf') format('truetype');
+      }
+      @font-face {
+        font-family: 'jalnan';
+        src: url('resources/font/Jalnan.ttf') format('truetype');
+      }
+      @font-face {
+        font-family: 'noto_medium';
+        src: url('resources/font/NotoSansKR-Medium.otf') format('truetype');
       }
       .container {
         display: grid;
@@ -20,7 +32,7 @@
         grid-template-areas: 
         "header header header"
         "left-menu main ad"
-        "recommend recommend recommend"
+        "left-menu recommend ad"
         "footer footer footer";
       }
       .container > main {
@@ -29,15 +41,22 @@
       header {
         grid-area: header;
         text-align: center;
-        background-image: url('img/background.jpg');
+        /* background-image: url('img/background.jpg'); */
       }
       #left_menu_container {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 10px;
         grid-area: left-menu;
       }
       main {
+        padding: 30px;
         grid-area: main;
       }
       #ad {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 10px;
         grid-area: ad;
       }
       #recommend {
@@ -66,6 +85,7 @@
         flex-basis: 500px;
         flex-grow: 1;
         font-family: 'gmarket_medium';
+        /* font-family: 'jalnan'; */
       }
       .login {
         /* background-color: greenyellow; */
@@ -74,7 +94,6 @@
         height: auto;
         flex-basis: 200px;
         flex-grow: 1;
-
       }
       .logo {
         /* background-color: gray; */
@@ -84,6 +103,11 @@
         flex-basis: 200px;
         flex-grow: 1;
       }
+      .items {
+        font-family: 'noto_medium';
+      }
+      a:visited { color: black; text-decoration: none;}
+      a:link { color: red; text-decoration: none;}
 
     
     </style>
@@ -94,7 +118,7 @@
       <header>
         <div class="flex_container">
           <div class="logo">
-            <span>로고</span>
+            <!-- <span>로고</span> -->
           </div>
           <% if(typeof userId !== "undefined") { %>
             <div class="title">
